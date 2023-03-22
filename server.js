@@ -8,11 +8,11 @@ import fetch from 'node-fetch'
 // const eventId = "63f3b59791f11324dc3d29a3"
 const eventId = "640c6ba0a82bac563edf2655"
 const roundTime = [{
-    startTime: Date.UTC(2021, 2, 20, 10, 0, 0),
-    endTime: Date.UTC(2025, 2, 20, 10, 30, 0)
+    startTime: Date.UTC(2023, 3, 22, 16, 30, 0),
+    endTime: Date.UTC(2023, 3, 23, 6, 30, 0)
 }, {
-    startTime: Date.UTC(2021, 2, 20, 10, 30, 0),
-    endTime: Date.UTC(2025, 2, 20, 11, 0, 0)
+    startTime: Date.UTC(2023, 2, 20, 10, 30, 0),
+    endTime: Date.UTC(2023, 2, 20, 11, 0, 0)
 }]
 
 
@@ -145,11 +145,19 @@ app.get('/questions', async (req, res) => {
     */
     const Question = (await pModels)[0]
     try {
+        if(req.query.id) {
+            const question = await Question.findById(req.query.id)
+            console.log(question)
+            res.send(question)
+            return
+        }
         const questions = await Question.find()
         console.log(questions)
         res.send(questions)
-    } catch {
-        res.send([])
+    } catch(error) {
+        res.send({
+            error: error
+        })
     }
 })
 
@@ -420,7 +428,15 @@ app.post('/user/submit', async (req, res) => {
         return
     }
 
+
         const user = (await User.find({ token: token }))[0]
+        if(Date.now() - user.startTime[roundNo] > 3600000) {
+            res.status(401)
+            res.send({
+                error: "Time limit exceeded"
+            })
+            return
+        }
         // console.log(user)
         if(!user.qualified) {
             res.status(401)
@@ -437,7 +453,7 @@ app.post('/user/submit', async (req, res) => {
             return
         }
         user.endTime[roundNo] = Date.now()
-        const judge = 'http://18.138.227.89:2358'
+        const judge = 'https://judge0-new.gdsckgec.in/'
         const q = await Question.findById(user.questions[roundNo])
         let correct=0
         try {
