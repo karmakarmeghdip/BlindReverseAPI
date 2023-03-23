@@ -78,7 +78,7 @@ const pModels = dbInit()
 async function authenticateTokenUser(req) {
     const authHeader = req.headers['authorization']
     const token = authHeader && authHeader.split(' ')[1]
-    // console.log(token)
+    console.log(token)
     if(!token) return false
     const user = await (await pModels)[1].find({token: token})
     if(user) return token
