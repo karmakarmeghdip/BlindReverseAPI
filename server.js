@@ -8,8 +8,8 @@ import fetch from 'node-fetch'
 // const eventId = "63f3b59791f11324dc3d29a3"
 const eventId = "640c6ba0a82bac563edf2655"
 const roundTime = [{
-    startTime: Date.UTC(2022, 3, 22, 6, 0, 0),
-    endTime: Date.UTC(2024, 3, 24, 8, 30, 0)
+    startTime: new Date("2023-03-22T10:30:00.000+05:30"),
+    endTime: new Date("2023-03-24T10:30:00.000+05:30")
 }, {
     startTime: Date.UTC(2023, 2, 20, 10, 30, 0),
     endTime: Date.UTC(2023, 2, 20, 11, 0, 0)
