@@ -8,8 +8,8 @@ import fetch from 'node-fetch'
 // const eventId = "63f3b59791f11324dc3d29a3"
 const eventId = "640c6ba0a82bac563edf2655"
 const roundTime = [{
-    startTime: Date.UTC(2023, 3, 22, 6, 0, 0),
-    endTime: Date.UTC(2023, 3, 24, 8, 30, 0)
+    startTime: Date.UTC(2022, 3, 22, 6, 0, 0),
+    endTime: Date.UTC(2024, 3, 24, 8, 30, 0)
 }, {
     startTime: Date.UTC(2023, 2, 20, 10, 30, 0),
     endTime: Date.UTC(2023, 2, 20, 11, 0, 0)
@@ -321,6 +321,7 @@ app.post('/user/start', async (req, res) => {
     const [Question, User] = await pModels
 
     if(Date.now() < roundTime[roundNo-1].startTime) {
+        console.log(roundTime[roundNo-1].startTime)
         res.status(401)
         res.send({
             error: "Round not started"
