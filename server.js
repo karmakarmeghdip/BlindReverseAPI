@@ -419,6 +419,33 @@ app.post('/user/run', async (req, res) => {
     
 })
 
+app.post('/user/disqualify', async (req, res) => {
+    const token = await authenticateTokenUser(req)
+    if (!token) {
+        res.status(401)
+        res.send({
+            error: "No Token"
+        })
+        return
+    }
+    const [_, User] = await pModels
+
+    try {
+        const user = (await User.find({ token: token }))[0]
+        user.qualified = false
+        await user.save()
+        res.send({
+            message: "User disqualified"
+        })
+    } catch(error) {
+        console.log(error)
+        res.status(401)
+        res.send({
+            error: error
+        })
+    }
+})
+
 app.post('/user/submit', async (req, res) => {
     const token = await authenticateTokenUser(req)
     console.log(token)
@@ -523,7 +550,7 @@ app.get('/leaderboard/:roundNo', async (req, res) => {
         }
     })
 
-    res.send(users.filter(user => user.endTime[roundNo]))
+    res.send(users.filter(user => user.endTime[roundNo] && user.qualified))
 })
 
 app.listen(port, () => {
