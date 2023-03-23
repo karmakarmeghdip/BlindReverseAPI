@@ -1,7 +1,7 @@
 import express from 'express'
 import crypto from 'crypto'
 import mongoose from 'mongoose'
-// import cors from 'cors'
+import cors from 'cors'
 const app = express()
 const port = 3000
 import fetch from 'node-fetch'
@@ -16,7 +16,10 @@ const roundTime = [{
 }]
 
 
-// app.use(cors());
+app.use(cors({
+    origin: "http://localhost:3001",
+    optionsSuccessStatus: 200
+}));
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
