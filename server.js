@@ -17,7 +17,7 @@ const roundTime = [{
 
 
 app.use(cors({
-    origin: ["http://localhost:3001", "https://antadrisht.vercel.app"],
+    origin: ["http://localhost:3001", "https://antadrisht.vercel.app", "https://blindcoding.gdsckgec.in", "https://reversecoding.gdsckgec.in"],
     optionsSuccessStatus: 200
 }));
 app.use(express.json())
