@@ -353,10 +353,11 @@ app.post('/user/start', async (req, res) => {
         console.log(user)
         await user.save()
         res.send(question)
-    } catch {
+    } catch(error) {
+        console.log(error)
         res.status(401)
         res.send({
-            error: "Invalid Token"
+            error: error
         })
     }
 })
