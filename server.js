@@ -550,7 +550,7 @@ app.get('/leaderboard/:roundNo', async (req, res) => {
         }
     })
 
-    res.send(users.filter(user => user.endTime[roundNo] && user.qualified))
+    res.send(users.filter(user => user.endTime[roundNo]))
 })
 
 app.listen(port, () => {
