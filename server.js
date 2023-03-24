@@ -240,7 +240,7 @@ app.post('/user/login', async (req, res) => {
     const userId = req.body.userId
     const password = req.body.password
     const User = (await pModels)[1]
-    const resp = await fetch(`https://tessarus-staging.gdsckgec.in/api/events/checkin/`, {
+    const resp = await fetch(`https://tessarus.gdsckgec.in/api/events/checkin/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
