@@ -356,7 +356,8 @@ app.post('/user/start', async (req, res) => {
         }
         user.startTime[roundNo-1] = Date.now()
         // Get a random question from the round
-        const question = await Question.find({ roundNo: roundNo }).skip(Math.floor(Math.random() * await Question.countDocuments({ roundNo: roundNo }))).limit(1)
+        const questions = await Question.find({ roundNo: roundNo })
+        const question = questions[Math.floor(Math.random()*questions.length)];
         user.questions[roundNo-1] = question[0]._id
         console.log(user)
         await user.save()
