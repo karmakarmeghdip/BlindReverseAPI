@@ -523,7 +523,7 @@ app.post('/user/submit', async (req, res) => {
         return
     }
         user.points = (correct*100)/q.testcases.length
-        if(user.points>75) {
+        if(user.points>50) {
             user.qualified = true
         } else {
             user.qualified = false
