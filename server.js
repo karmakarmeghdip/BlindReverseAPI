@@ -537,9 +537,9 @@ app.get('/leaderboard/:roundNo', async (req, res) => {
     const roundNo = req.params.roundNo-1
     const users = await User.find()
     users.sort((a, b) => {
-        if(a.points[roundNo] > b.points[roundNo]) {
+        if(a.points > b.points) {
             return 1
-        } else if(a.points[roundNo] < b.points[roundNo]) {
+        } else if(a.points < b.points) {
             return -1
         } else {
             if(a.endTime[roundNo] - a.startTime[roundNo] > b.endTime[roundNo] - b.startTime[roundNo]) {
