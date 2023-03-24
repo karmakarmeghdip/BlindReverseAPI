@@ -358,7 +358,7 @@ app.post('/user/start', async (req, res) => {
         // Get a random question from the round
         const questions = await Question.find({ roundNo: roundNo })
         const question = questions[Math.floor(Math.random()*questions.length)];
-        user.questions[roundNo-1] = question[0]._id
+        user.questions[roundNo-1] = question._id
         console.log(user)
         await user.save()
         res.send(question)
